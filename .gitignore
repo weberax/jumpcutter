@@ -93,3 +93,6 @@ ENV/
 *.iml
 out
 gen
+
+#Temp folder created by the programm
+TEMP/

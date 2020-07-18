@@ -1,5 +1,4 @@
-Pillow
 audiotsm
 scipy
 numpy
-pytube
+tqdm
