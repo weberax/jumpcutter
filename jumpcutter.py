@@ -92,7 +92,7 @@ def _get_tree_expression_rec(chunks) -> str:
 def speed_up_video(
         input_file: str,
         output_file: str = None,
-        frame_rate: int = 30,
+        frame_rate: float = 30,
         sample_rate: int = 44100,
         silent_threshold: float = 0.03,
         silent_speed: float = 5.0,
@@ -135,7 +135,7 @@ def speed_up_video(
         # print(f'Found Framerate {frame_rate}')
 
     match_duration = re.search(r'duration=([\d.]*)', str(std_out))
-    original_duration = 0
+    original_duration = 0.0
     if match_duration is not None:
         original_duration = float(match_duration.group(1))
         # print(f'Found Duration {original_duration}')
