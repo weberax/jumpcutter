@@ -219,7 +219,7 @@ def speed_up_video(
     expression = _get_tree_expression(chunks)
 
     filter_graph_file = open(temp_folder + "/filterGraph.txt", 'w')
-    filter_graph_file.write('setpts=')
+    filter_graph_file.write(f'fps=fps={frame_rate},setpts=')
     filter_graph_file.write(expression.replace(',', '\\,'))
     filter_graph_file.close()
 
