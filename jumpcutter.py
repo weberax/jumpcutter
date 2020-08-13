@@ -126,7 +126,7 @@ def speed_up_video(
 
     # Find out framerate and duration of the input video
     command = 'ffprobe -i "{}" -hide_banner -loglevel error -select_streams v' \
-              ' -show_entries format=duration:stream=r_frame_rate'.format(input_file)
+              ' -show_entries format=duration:stream=avg_frame_rate'.format(input_file)
     p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, universal_newlines=True)
     std_out, err = p.communicate()
     match_frame_rate = re.search(r'frame_rate=(\d*)/(\d*)', str(std_out))
