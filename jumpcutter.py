@@ -51,7 +51,8 @@ def _delete_path(s):  # Dangerous! Watch out!
 
 # TODO maybe transition to use the time=... instead of frame=... as frame is not accessible when exporting audio only
 def _run_timed_ffmpeg_command(command, **kwargs):
-    p = subprocess.Popen(command, stderr=subprocess.PIPE, universal_newlines=True, bufsize=1)
+    p = subprocess.Popen(command, stderr=subprocess.PIPE,
+                         universal_newlines=True, bufsize=1, shell=True)
 
     with tqdm(**kwargs) as t:
         while p.poll() is None:
@@ -127,7 +128,9 @@ def speed_up_video(
     # Find out framerate and duration of the input video
     command = 'ffprobe -i "{}" -hide_banner -loglevel error -select_streams v' \
               ' -show_entries format=duration:stream=avg_frame_rate'.format(input_file)
-    p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, bufsize=1, universal_newlines=True)
+    p = subprocess.Popen(command, stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE, bufsize=1,
+                         universal_newlines=True, shell=True)
     std_out, err = p.communicate()
     match_frame_rate = re.search(r'frame_rate=(\d*)/(\d*)', str(std_out))
     if match_frame_rate is not None:
