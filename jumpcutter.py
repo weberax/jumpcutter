@@ -287,4 +287,8 @@ if __name__ == '__main__':
         print(f"Processing file {index + 1}/{len(files)} '{os.path.basename(file)}'")
         local_options = dict(args)
         local_options['input_file'] = file
-        speed_up_video(**local_options)
+        try:
+            speed_up_video(**local_options)
+        except Exception as e:
+            print(os.path.basename(file), "failed :(", e)
+            continue
