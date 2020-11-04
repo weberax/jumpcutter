@@ -222,7 +222,7 @@ def speed_up_video(
     expression = _get_tree_expression(chunks)
 
     filter_graph_file = open(temp_folder + "/filterGraph.txt", 'w')
-    filter_graph_file.write(f'fps=fps={frame_rate},setpts=')
+    filter_graph_file.write('fps=fps={},setpts='.format(frame_rate))
     filter_graph_file.write(expression.replace(',', '\\,'))
     filter_graph_file.close()
 
@@ -284,7 +284,8 @@ if __name__ == '__main__':
     # with tqdm(files, unit='file') as progress_bar:
     for index, file in enumerate(files):
         # progress_bar.set_description("Processing file '{}'".format(os.path.basename(file)))
-        print(f"Processing file {index + 1}/{len(files)} '{os.path.basename(file)}'")
+        print("Processing file {}/{}\
+              '{}'".format(index + 1, len(files), os.path.basename(file)))
         local_options = dict(args)
         local_options['input_file'] = file
         speed_up_video(**local_options)
